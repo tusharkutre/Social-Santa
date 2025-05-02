@@ -11,6 +11,7 @@
 
 # Features :
 - Dark/light theme mode
+- fully Responsive
 - Advanced API Caching : refreshes page every after 30secs
 - Animations & Interactions using GSAP
 

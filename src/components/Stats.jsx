@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import youtube from "../assets/youtube.png";
 const API_KEY = import.meta.env.VITE_YT_API_KEY;
@@ -81,10 +81,6 @@ export default function Stats() {
   if (isLoading)
     return <p className="text-center text-3xl font-semibold py-10">Loading stats...</p>;
 
-  // Check if stats exists and has the expected properties
-  // const hasSubscriberCount = stats && 'subscriberCount' in stats;
-  // const hasViewCount = stats && 'viewCount' in stats;
-  
   return (
     <section className="py-16 px-16 mb-20 bg-slate-200/20 w-fit mx-auto max-w-7xl rounded-lg shadow-lg">
       <div className="flex relative">
@@ -94,17 +90,7 @@ export default function Stats() {
           <img className="absolute -top-14 -left-10" width={45} src={youtube} alt="YouTube Logo" />
         </div>
       </div>
-      <div className="text-center text-xl space-y-4">
-        {/* Debug info */}
-        {/* <div className="bg-gray-100 p-4 rounded-md mb-6 text-left text-sm">
-          <h3 className="font-bold mb-2">Debug Info:</h3>
-          <p>Has subscriber count: {hasSubscriberCount ? "Yes" : "No"}</p>
-          <p>Has view count: {hasViewCount ? "Yes" : "No"}</p>
-          <p>Raw subscriber count: {stats?.subscriberCount || "undefined"}</p>
-          <p>Raw view count: {stats?.viewCount || "undefined"}</p>
-          <p>Channel ID: {CHANNEL_ID}</p>
-        </div> */}
-        
+      <div className="text-center text-xl space-y-4">        
         <p>Subscribers: {stats?.subscriberCount ? parseInt(stats.subscriberCount).toLocaleString() : "0"}</p>
         <p>Total Views: {stats?.viewCount ? parseInt(stats.viewCount).toLocaleString() : "0"}</p>
         {stats?.latestVideo && (
