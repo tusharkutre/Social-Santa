@@ -1,7 +1,7 @@
 # Social Santa App
 
 # Description :
-- Created Social Santa web app using React.js and TailwindCSS with Modern UI and fully Responsive.
+- Created Social Santa Landing page using React.js and TailwindCSS with Modern UI and fully Responsive.
 
 # Tech Stack :
 - React.js for Frontend
