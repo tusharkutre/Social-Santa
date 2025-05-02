@@ -13,6 +13,7 @@
 - Dark/light theme mode
 - fully Responsive
 - Advanced API Caching : refreshes page every after 30secs
+- Stores the YT stats data in local storage.
 - Animations & Interactions using GSAP
 
 # How to Run?
