@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import Form from './Form'
 
 export default function Contact({isDarkMode}) {
@@ -19,7 +17,7 @@ export default function Contact({isDarkMode}) {
         />
       </div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className={`text-4xl font-semibold tracking-tight text-balance sm:text-5xl ${isDarkMode ? "text-white" : "text-black"}`}>Contact sales</h2>
+        <h2 className={`text-4xl font-semibold tracking-tight text-balance sm:text-5xl ${isDarkMode ? "text-white" : "text-black"}`}>Contact Us</h2>
         <p className={`mt-4 text-lg/8 text-gray-600 ${isDarkMode ? "text-white" : "text-black"}`}>"Social Santa—always ready to help. Reach out today! ❤️"</p>
       </div>
 
