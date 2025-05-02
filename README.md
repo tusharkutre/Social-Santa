@@ -14,3 +14,5 @@
 - Advanced API Caching : refreshes page every after 30secs
 - Animations & Interactions using GSAP
 
+# How to Run?
+- E:\social santa> npm run dev
