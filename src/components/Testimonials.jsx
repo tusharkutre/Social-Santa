@@ -60,11 +60,6 @@ var settings = {
 };
 
 const Carousel = ({ slide, isDarkMode }) => {
-  // Add fallback image handling
-  const handleImageError = (e) => {
-    e.target.src = "https://via.placeholder.com/100"; // Fallback to a placeholder image
-    e.target.alt = "Profile placeholder";
-  };
 
   return (
     <>
@@ -74,7 +69,6 @@ const Carousel = ({ slide, isDarkMode }) => {
             src={slide.img} 
             alt={`${slide.title} profile`} 
             className="w-20 h-20 rounded-full object-cover" 
-            onError={handleImageError}
           />
         </div>
         <div className='text-center'>
