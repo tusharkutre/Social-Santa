@@ -4,8 +4,8 @@ import youtube from "../assets/youtube.png";
 export default function Stats() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const API_KEY = "AIzaSyArOdbQ6m_Ha-SnLDECJ8zgMS898yxl1fQ";
-  const CHANNEL_ID = "UCjsg84p_iyg3a6fvnwVwVxQ";
+  const API_KEY = process.env.REACT_APP_YT_API_KEY;
+  const CHANNEL_ID = process.env.REACT_APP_YT_CHANNEL_ID;
 
   // Fetch data from YouTube API
   // If the fetch fails, use cached data from localStorage
