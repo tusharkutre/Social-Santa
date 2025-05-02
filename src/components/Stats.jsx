@@ -4,15 +4,15 @@ import youtube from "../assets/youtube.png";
 const API_KEY = import.meta.env.VITE_YT_API_KEY;
 const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID;
 
-// Function to fetch YouTube stats with better error handling
-const fetchStats = async () => {
-  console.log("Using API Key:", API_KEY);
-  console.log("Using Channel ID:", CHANNEL_ID);
+// Function to fetch YouTube stats with proper request cancellation
+const fetchStats = async (signal) => {
   
   try {
-    // Fetch channel data
+    console.log("Making API request to YouTube...");
+    // Fetch channel data with AbortSignal
     const channelRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`
+      `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`,
+      { signal } // Add AbortSignal here
     );
     
     if (!channelRes.ok) {
@@ -22,7 +22,6 @@ const fetchStats = async () => {
     }
     
     const channelData = await channelRes.json();
-    console.log("Channel data response:", channelData);
 
     if (!channelData.items || channelData.items.length === 0) {
       throw new Error("Invalid API response: No channel items found");
@@ -31,9 +30,10 @@ const fetchStats = async () => {
     const stats = channelData.items[0].statistics;
     const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
 
-    // Fetch latest video
+    // Fetch latest video with AbortSignal
     const videoRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${API_KEY}`
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${API_KEY}`,
+      { signal } // Add AbortSignal here
     );
     
     if (!videoRes.ok) {
@@ -43,43 +43,48 @@ const fetchStats = async () => {
     }
     
     const videoData = await videoRes.json();
-    console.log("Video data response:", videoData);
 
     if (!videoData.items || videoData.items.length === 0) {
       throw new Error("No latest video found");
     }
 
     const latestVideo = videoData.items[0].snippet;
-
+    
     return { ...stats, latestVideo };
   } catch (error) {
+    // Don't throw aborted fetch errors
+    if (error.name === 'AbortError') {
+      console.log('Fetch aborted');
+      return null;
+    }
     console.error("Error in fetchStats:", error);
-    throw error; // Re-throw to let React Query handle it
+    throw error;
   }
 };
 
-// Helper function to safely parse and format numbers
-const formatNumber = (value) => {
-  if (!value && value !== 0) return "0";
-  const num = parseInt(value);
-  return isNaN(num) ? "0" : num.toLocaleString();
-};
-
 export default function Stats() {
-  // Include error in the destructured values
   const { data: stats, isLoading, isError, error } = useQuery({
     queryKey: ["youtubeStats"],
-    queryFn: fetchStats,
+    queryFn: ({ signal }) => fetchStats(signal), // Pass AbortSignal to fetchStats
     refetchInterval: 30000,
     staleTime: 60000,
+    gcTime: 0, // Immediately garbage collect when component unmounts
   });
+
+  // Debug useEffect with conditional to reduce unnecessary logs
+  useEffect(() => {
+    if (stats) {
+      console.log("Stats data updated:", stats);
+    }
+  }, [stats]);
 
   if (isLoading)
     return <p className="text-center text-3xl font-semibold py-10">Loading stats...</p>;
 
-  // Debug log to see what stats we're getting
-  console.log("Stats data received:", stats);
-
+  // Check if stats exists and has the expected properties
+  // const hasSubscriberCount = stats && 'subscriberCount' in stats;
+  // const hasViewCount = stats && 'viewCount' in stats;
+  
   return (
     <section className="py-16 px-16 mb-20 bg-slate-200/20 w-fit mx-auto max-w-7xl rounded-lg shadow-lg">
       <div className="flex relative">
@@ -90,8 +95,18 @@ export default function Stats() {
         </div>
       </div>
       <div className="text-center text-xl space-y-4">
-        <p>Subscribers: {formatNumber(stats?.subscriberCount)}</p>
-        <p>Total Views: {formatNumber(stats?.viewCount)}</p>
+        {/* Debug info */}
+        {/* <div className="bg-gray-100 p-4 rounded-md mb-6 text-left text-sm">
+          <h3 className="font-bold mb-2">Debug Info:</h3>
+          <p>Has subscriber count: {hasSubscriberCount ? "Yes" : "No"}</p>
+          <p>Has view count: {hasViewCount ? "Yes" : "No"}</p>
+          <p>Raw subscriber count: {stats?.subscriberCount || "undefined"}</p>
+          <p>Raw view count: {stats?.viewCount || "undefined"}</p>
+          <p>Channel ID: {CHANNEL_ID}</p>
+        </div> */}
+        
+        <p>Subscribers: {stats?.subscriberCount ? parseInt(stats.subscriberCount).toLocaleString() : "0"}</p>
+        <p>Total Views: {stats?.viewCount ? parseInt(stats.viewCount).toLocaleString() : "0"}</p>
         {stats?.latestVideo && (
           <div className="mt-6">
             <h3 className="text-2xl font-semibold mb-2">Latest Video</h3>
