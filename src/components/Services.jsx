@@ -1,11 +1,11 @@
 import React from "react";
 
 const services = [
-  { image: "src/assets/images/service1.png", size: "col-span-2 row-span-1" },
-  { image: "src/assets/images/service2.png", size: "lg:col-span-1 col-span-2 row-span-1" },
-  { image: "src/assets/images/service3.png", size: "lg:col-span-1 col-span-2 row-span-1" },
-  { image: "src/assets/images/service4.png", size: "lg:col-span-1 col-span-2 row-span-1" },
-  { image: "src/assets/images/service5.png", size: "lg:col-span-1 col-span-2 row-span-1" },
+  { image: "src/assets/service1.png", size: "col-span-2 row-span-1" },
+  { image: "src/assets/service2.png", size: "lg:col-span-1 col-span-2 row-span-1" },
+  { image: "src/assets/service3.png", size: "lg:col-span-1 col-span-2 row-span-1" },
+  { image: "src/assets/service4.png", size: "lg:col-span-1 col-span-2 row-span-1" },
+  { image: "src/assets/service5.png", size: "lg:col-span-1 col-span-2 row-span-1" },
 ];
 
 const Services = () => {
