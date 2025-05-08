@@ -1,31 +1,30 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
 .light-mode {
-    background-color: #ffffff;
-    color: #000000;
-  }
-  
-  .dark-mode {
-    background-color: #000000;
-    color: #ffffff;
-  }
-  
-  .toggle-btn {
-    
-    cursor: pointer;
-    border: none;
-  }
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-  }
-  
-  #smooth-wrapper {
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  #smooth-content {
-    will-change: transform;
-  }
-  
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.toggle-btn {
+  cursor: pointer;
+  border: none;
+}
+
+#smooth-wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+#smooth-content {
+  will-change: transform;
+}

@@ -1,4 +1,7 @@
-export default function CTA({ isDarkMode }) {
+import { useDarkTheme } from "./DarkThemeProvider"
+
+export default function CTA() {
+  const { isDarkMode } = useDarkTheme(); // using the custom hook to get the dark mode state from the provider
     return (
       <div className={isDarkMode ? "bg-gray-900" : "bg-white"}>
         <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">

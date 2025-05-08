@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import DarkModeButton from "./DarkModeButton";
+import { useDarkTheme } from "./DarkThemeProvider";
 
 // Array of objects
 const navigation = [
@@ -11,9 +12,10 @@ const navigation = [
   { name: "Company", href: "#" },
 ];
 
-export default function Hero({ toggleDarkMode, isDarkMode }) {
+export default function Hero() {
   // State for mobile menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useDarkTheme(); // Using the custom hook to get the dark mode state and toggle function
 
   return (
     <>

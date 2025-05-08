@@ -63,7 +63,7 @@ const fetchStats = async (signal) => {
 };
 
 export default function Stats() {
-  const { data: stats, isLoading, isError, error } = useQuery({
+  const { data: stats, isLoading} = useQuery({
     queryKey: ["youtubeStats"],
     queryFn: ({ signal }) => fetchStats(signal), // Pass AbortSignal to fetchStats
     refetchInterval: 30000,
