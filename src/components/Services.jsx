@@ -1,25 +1,11 @@
 import React from "react";
-import card1 from "../assets/service1.png";
-import card2 from "../assets/service2.png";
-import card3 from "../assets/service3.png";
-import card4 from "../assets/service4.png";
-import card5 from "../assets/service5.png";
-
-const services = [
-  { image: card1, size: "col-span-2 row-span-1" },
-  { image: card2, size: "lg:col-span-1 col-span-2 row-span-1" },
-  { image: card3, size: "lg:col-span-1 col-span-2 row-span-1" },
-  { image: card4, size: "lg:col-span-1 col-span-2 row-span-1" },
-  { image: card5, size: "lg:col-span-1 col-span-2 row-span-1" },
-];
+import { services } from "../data"
 
 const Services = () => {
   return (
     <>
       <section className="services relative">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      
-
           <section className="">
             <div className="mx-auto max-w-2xl lg:text-center">
               <h2 className="text-2xl font-semibold text-indigo-600">Our Services</h2>

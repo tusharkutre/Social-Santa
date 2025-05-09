@@ -3,14 +3,7 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import DarkModeButton from "./DarkModeButton";
 import { useDarkTheme } from "./DarkThemeProvider";
-
-// Array of objects
-const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
-];
+import { navigation } from "../data";
 
 export default function Hero() {
   // State for mobile menu
