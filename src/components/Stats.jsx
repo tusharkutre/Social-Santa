@@ -1,54 +1,44 @@
-import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import youtube from "../assets/youtube.png";
+
 const API_KEY = import.meta.env.VITE_YT_API_KEY;
 const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID;
 
-// Function to fetch YouTube stats with proper request cancellation
+// Simplified fetch function with better error handling
 const fetchStats = async (signal) => {
-  
   try {
-    console.log("Making API request to YouTube...");
-    // Fetch channel data with AbortSignal
+    // Fetch channel data
     const channelRes = await fetch(
       `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`,
-      { signal } // Add AbortSignal here
+      { signal }
     );
     
     if (!channelRes.ok) {
-      const errorData = await channelRes.json();
-      console.error("Channel API error:", errorData);
-      throw new Error(`Channel API error: ${errorData?.error?.message || channelRes.statusText}`);
+      throw new Error(`Channel API error: ${channelRes.status}`);
     }
     
     const channelData = await channelRes.json();
-
-    if (!channelData.items || channelData.items.length === 0) {
-      throw new Error("Invalid API response: No channel items found");
+    const channel = channelData.items?.[0];
+    
+    if (!channel) {
+      throw new Error("No channel found");
     }
 
-    const stats = channelData.items[0].statistics;
-    const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+    const stats = channel.statistics;
+    const uploadsPlaylistId = channel.contentDetails.relatedPlaylists.uploads;
 
-    // Fetch latest video with AbortSignal
+    // Fetch latest video
     const videoRes = await fetch(
       `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${API_KEY}`,
-      { signal } // Add AbortSignal here
+      { signal }
     );
     
     if (!videoRes.ok) {
-      const errorData = await videoRes.json();
-      console.error("Video API error:", errorData);
-      throw new Error(`Video API error: ${errorData?.error?.message || videoRes.statusText}`);
+      throw new Error(`Video API error: ${videoRes.status}`);
     }
     
     const videoData = await videoRes.json();
-
-    if (!videoData.items || videoData.items.length === 0) {
-      throw new Error("No latest video found");
-    }
-
-    const latestVideo = videoData.items[0].snippet;
+    const latestVideo = videoData.items?.[0]?.snippet;
     
     return { ...stats, latestVideo };
   } catch (error) {
@@ -57,29 +47,25 @@ const fetchStats = async (signal) => {
       console.log('Fetch aborted');
       return null;
     }
-    console.error("Error in fetchStats:", error);
+    console.error("Error fetching YouTube stats:", error);
     throw error;
   }
 };
 
 export default function Stats() {
-  const { data: stats, isLoading} = useQuery({
+  const { data: stats, isLoading } = useQuery({
     queryKey: ["youtubeStats"],
-    queryFn: ({ signal }) => fetchStats(signal), // Pass AbortSignal to fetchStats
+    queryFn: ({ signal }) => fetchStats(signal),
     refetchInterval: 30000,
     staleTime: 60000,
-    gcTime: 0, // Immediately garbage collect when component unmounts
   });
 
-  // Debug useEffect with conditional to reduce unnecessary logs
-  useEffect(() => {
-    if (stats) {
-      console.log("Stats data updated:", stats);
-    }
-  }, [stats]);
+  // Format numbers with commas
+  const formatNumber = (num) => parseInt(num || 0).toLocaleString();
 
-  if (isLoading)
+  if (isLoading) {
     return <p className="text-center text-3xl font-semibold py-10">Loading stats...</p>;
+  }
 
   return (
     <section className="py-16 px-16 mb-20 bg-slate-200/20 w-fit mx-auto max-w-7xl rounded-lg shadow-lg">
@@ -90,9 +76,11 @@ export default function Stats() {
           <img className="absolute -top-14 -left-10" width={45} src={youtube} alt="YouTube Logo" />
         </div>
       </div>
+      
       <div className="text-center text-xl space-y-4">        
-        <p>Subscribers: {stats?.subscriberCount ? parseInt(stats.subscriberCount).toLocaleString() : "0"}</p>
-        <p>Total Views: {stats?.viewCount ? parseInt(stats.viewCount).toLocaleString() : "0"}</p>
+        <p>Subscribers: {formatNumber(stats?.subscriberCount)}</p>
+        <p>Total Views: {formatNumber(stats?.viewCount)}</p>
+        
         {stats?.latestVideo && (
           <div className="mt-6">
             <h3 className="text-2xl font-semibold mb-2">Latest Video</h3>

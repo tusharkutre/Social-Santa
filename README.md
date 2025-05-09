@@ -16,9 +16,10 @@
 - Stores the YT stats data in local storage.
 - Animations & Interactions using GSAP
 
-# Changes :
+# What changed ?
 - modified services section UI plus responsive.
-- Dark mode button yet to be done
+- Dark mode toggle button 
+- Optimized stats component.
 
 # How to Run?
 - E:\social santa> npm run dev
