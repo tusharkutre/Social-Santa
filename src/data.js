@@ -10,10 +10,10 @@ import user1 from "./assets/user1.jpg";
 
 // Array of objects
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Our Services", href: "/services" },
+  { name: "Testimonials", href: "/testimonials" },
 ];
 
 // Array of objects for services

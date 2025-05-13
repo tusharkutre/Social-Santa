@@ -21,8 +21,8 @@ const Services = () => {
               <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {services.map((service, index) => (
                   <div
-                    key={index}
-                    className={`rounded-xl shadow hover:shadow-lg overflow-hidden ${service.size}`}
+                  key={index}
+                  className={`rounded-xl shadow hover:shadow-lg overflow-hidden ${service.size}`}
                   >
                     <img className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" src={service.image} alt={`Service ${index + 1}`} />
                   </div>
