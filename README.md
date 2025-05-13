@@ -1,6 +1,6 @@
 # Social Santa App
 
-![heroImage](https://github.com/user-attachments/assets/c7d6f165-e05e-4f52-b92f-c5f88bba52e5)
+![Uploading github-cover.png…]()
 
 # Description :
 - Created Social Santa Landing page using React.js and TailwindCSS with Modern UI and fully Responsive.
