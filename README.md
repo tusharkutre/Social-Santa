@@ -17,8 +17,9 @@
 - Animations & Interactions using GSAP
 
 # What changed ?
+- Changed Hero section 
 - modified services section UI plus responsive.
-- Dark mode toggle button 
+- Added Dark mode toggle button 
 - Optimized stats component.
 
 # How to Run?

@@ -4,9 +4,19 @@ import card3 from "./assets/service3.png";
 import card4 from "./assets/service4.png";
 import card5 from "./assets/service5.png";
 
+// companies logos
+import slack from "./assets/slack.png"
+import amazon from "./assets/amazon.png"
+import woocommerce from "./assets/woocommerce.png"
+import meundies from "./assets/meundies.png"
+import sitepoint from "./assets/sitepoint.png"
+
 import user2 from "./assets/user2.jpg";
 import user3 from "./assets/user3.jpg";
 import user1 from "./assets/user1.jpg";
+
+// companies logo
+const logos = [slack,amazon,woocommerce,meundies,sitepoint,slack,amazon,,woocommerce,meundies,sitepoint];
 
 // Array of objects
 const navigation = [
@@ -82,4 +92,4 @@ var settings = {
   ],
 };
 
-export { navigation, services, slideData, settings };
+export { navigation, services, slideData, settings , logos };
