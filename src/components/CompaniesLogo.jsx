@@ -6,7 +6,7 @@ const CompaniesLogo = () => {
   return (
     <>
       <section className="container mx-auto">
-        <div className="w-full overflow-hidden space-y-10 sm:space-y-0 mx-10 py-40 flex sm:flex-row flex-col sm:items-center items-start">
+        <div className="w-full overflow-hidden space-y-10 sm:space-y-0 md:py-30 py-10  flex sm:flex-row flex-col sm:items-center items-start">
           <div className="w-[300px] shrink-0 text-gray-600 border-l-4 border-blue-500 bg-slate-100 rounded-sm py-2 z-10 sm:text-base text-xl font-semibold text-left px-5">
             proud partner at <br /> Hubspot & segment
           </div>
