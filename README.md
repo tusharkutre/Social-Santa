@@ -17,7 +17,8 @@
 - Animations & Interactions using GSAP
 
 # What changed ?
-- Changed Hero section 
+- Changed Hero section UI
+- Added smoothness to the app when scrolled.
 - modified services section UI plus responsive.
 - Added Dark mode toggle button 
 - Optimized stats component.
