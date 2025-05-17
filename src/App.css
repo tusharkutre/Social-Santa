@@ -3,7 +3,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: auto;
+  /* overflow: auto; */
 }
 .light-mode {
   background-color: #ffffff;

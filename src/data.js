@@ -14,17 +14,36 @@ import sitepoint from "./assets/sitepoint.png"
 import user2 from "./assets/user2.jpg";
 import user3 from "./assets/user3.jpg";
 import user1 from "./assets/user1.jpg";
-
+  
 // companies logo
 const logos = [slack,amazon,woocommerce,meundies,sitepoint,slack,amazon,,woocommerce,meundies,sitepoint];
 
 // Array of objects
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-  { name: "Our Services", href: "/services" },
-  { name: "Testimonials", href: "/testimonials" },
+  { name: "Home", id: "/" },
+  { name: "About Us", id: "about" },
+  { name: "Our Services", id: "services" },
+  { name: "Testimonials", id: "testimonials" },
 ];
+
+//business data
+const features = [
+  {
+    icon : "❤️",
+    title : "Find out what you need?",
+    desc : "we present you a proposal and discuss about business needs."
+  },
+  {
+    icon : "⭐",
+    title : "Work out the details",
+    desc : "protocols apart from engage models,pricing billing"
+  },
+  {
+    icon : "🚀",
+    title : "we get to work fast",
+    desc : "protocols apart from engage models,pricing billing"
+  },
+]
 
 // Array of objects for services
 const services = [
@@ -92,4 +111,4 @@ var settings = {
   ],
 };
 
-export { navigation, services, slideData, settings , logos };
+export { navigation, services, slideData, settings , logos , features };

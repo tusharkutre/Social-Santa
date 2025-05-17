@@ -12,9 +12,7 @@ const Navbar = () => {
   const { isDarkMode, toggleDarkMode } = useDarkTheme(); // Using the custom hook to get the dark mode state and toggle function
   return (
     <>
-        <nav
-          className="flex items-center sticky top-0 z-50 justify-between p-6 lg:px-8"
-        >
+        <nav className="flex items-center sticky top-0 z-50 justify-between p-3 lg:px-8">
           <div className="flex  lg:flex-1">
             <a href="/" className="flex items-center flex-row-reverse gap-2">
               <h2 className="text-2xl font-medium hidden md:block">
@@ -57,7 +55,7 @@ const Navbar = () => {
             {navigation.map((item,index) => (
               <a
                 key={index}
-                href={item.href}
+                href={item.id}
                 onClick={() => setActiveLink(item.href)}
                 className={`text-md font-semibold ${
                   isDarkMode

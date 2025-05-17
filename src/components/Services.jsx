@@ -6,7 +6,7 @@ const Services = () => {
     <>
       <section className="services relative">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <section className="">
+          <section id="services" className="">
             <div className="mx-auto max-w-2xl lg:text-center">
               <h2 className="text-2xl font-semibold text-indigo-600">Our Services</h2>
               <p className="mt-2 text-4xl font-semibold text-gray-900 sm:text-5xl">
