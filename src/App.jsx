@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import CompaniesLogo from "./components/CompaniesLogo";
 import Business from "./components/Business";
 import Schedule from "./components/Schedule";
+import Monitor from "./components/Monitor";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <CompaniesLogo />
         <Business/>
         <Schedule/>
+        <Monitor/>
         {/* <CTA /> */}
         <Stats />
         <Features />
